@@ -23,6 +23,10 @@ jobs:
         id: review
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Without this, the action refuses to run on PRs opened by any bot actor -- including
+          # Dependabot's routine dependency-bump PRs -- with "Workflow initiated by non-human
+          # actor". Dependabot PRs still deserve the same gate as anyone else's.
+          allowed_bots: "dependabot[bot]"
           prompt: |
             Review this PR as a blocking code reviewer for a PUBLIC open-source repo. Check:
             correctness, secret leakage (no .env values, no real company/person/interview content --

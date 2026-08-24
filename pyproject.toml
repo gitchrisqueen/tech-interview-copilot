@@ -1,0 +1,10 @@
+[tool.ruff]
+line-length = 160
+
+[tool.ruff.lint]
+# Pyflakes + pycodestyle only. This codebase's Python files predate the breakout and use a
+# consistent house style (multi-import-per-line, long doc comments) shared with copilot-core and
+# hearing-copilot; ruff's stricter opinionated rule families (BLE/S/DTZ/TRY/SIM/UP) and the E401
+# "one import per line" rule fight that style rather than catching real bugs here.
+select = ["E", "F", "W"]
+ignore = ["E401", "E701", "E702"]
