@@ -1,0 +1,39 @@
+name: Gauntlet finding
+description: A UI/UX issue found during a gauntlet loop pass
+labels: [gauntlet]
+body:
+  - type: input
+    id: loop
+    attributes:
+      label: Loop number
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options: ["0 - cosmetic", "1 - minor", "2 - moderate", "3 - serious", "4 - blocking"]
+    validations:
+      required: true
+  - type: input
+    id: heuristic
+    attributes:
+      label: Heuristic / check violated
+      placeholder: "e.g. Nielsen #6 (recognition over recall), WCAG AA contrast, touch target < 44px"
+  - type: dropdown
+    id: viewport
+    attributes:
+      label: Viewport
+      options: ["1440x900", "1280x800", "768x1024", "390x844", "other (state in description)"]
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What's wrong, and what should happen instead
+    validations:
+      required: true
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot (attach)

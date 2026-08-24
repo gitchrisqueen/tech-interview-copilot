@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "id": "example",
+  "label": "Acme Robotics — Forward Deployed Engineer (demo)",
+  "updated": "2026-01-01",
+
+  "company": {
+    "name": "Acme Robotics",
+    "domain": "acme-robotics.example",
+    "one_liner": "A fictional warehouse-automation company (this is demo content) that builds agentic software to operate pick-and-pack robots alongside human workers. It plans routes, reconciles inventory counts against a warehouse-management system, and writes back corrections with a human approval step.",
+    "thesis": "This is a placeholder thesis for the demo profile. In a real profile, put your honest read of the company's hardest engineering problem here, phrased as a testable opinion you can defend out loud.",
+    "facts": [
+      { "text": "Founded 2022 (fictional). Raised a Series A led by a fictional VC firm.", "verified": true, "source": "https://acme-robotics.example/about" },
+      { "text": "About 60 people, HQ in a fictional city, remote-friendly.", "verified": true, "source": "https://acme-robotics.example/about" },
+      { "text": "Built on a fictional agent framework with a warehouse-management-system integration layer.", "verified": true, "source": "https://acme-robotics.example/tech" },
+      { "text": "This is an UNCONFIRMED example fact to demonstrate the '?' unconfirmed-fact marker in the Prep tab editor.", "verified": false, "source": "" }
+    ],
+    "tech_context": [
+      "Python", "gRPC", "ROS 2", "PostgreSQL", "Kubernetes", "warehouse-management systems", "computer vision"
+    ]
+  },
+
+  "role": {
+    "title": "Forward Deployed Engineer",
+    "what_they_want": [
+      "Embed with a customer site and own the deployment end to end.",
+      "Write integration code against the customer's existing warehouse-management system.",
+      "Translate operational rules into agent behavior: routes, exceptions, fallbacks.",
+      "Comfortable with a human-in-the-loop approval step on every write-back."
+    ]
+  },
+
+  "interview": {
+    "date": "2026-01-15",
+    "format": "Video call (demo)",
+    "duration_min": 30,
+    "interviewer_role": "Senior Forward Deployed Engineer",
+    "interviewer_name": "",
+    "interviewer_region": "",
+    "stage": "Stage 1 of 3: discovery call",
+    "notes": "This is placeholder interview-logistics text for the demo profile."
+  },
+
+  "must_hit": [
+    "This is a placeholder point the candidate wants to land early in the call.",
+    "A second placeholder point, e.g. a specific project with a name, users, and outcome."
+  ],
+
+  "do_not_say": [
+    "This is a placeholder for a claim the candidate must NOT make (e.g. an inaccurate title or an unverified number).",
+    "A second placeholder do-not-say entry."
+  ],
+
+  "objections": [
+    {
+      "objection": "Placeholder objection the interviewer might raise.",
+      "answer": "Placeholder answer the candidate would give.",
+      "artifact": "a link or reference the candidate could point to"
+    }
+  ],
+
+  "questions_to_ask": [
+    "This is a placeholder question the candidate could ask the interviewer.",
+    "A second placeholder question."
+  ]
+}

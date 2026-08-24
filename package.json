@@ -1,0 +1,19 @@
+{
+  "name": "tech-interview-copilot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local-first live copilot for technical job interviews: transcribes the call, detects questions, and drafts spoken answers and runnable code.",
+  "license": "MIT",
+  "homepage": "https://github.com/gitchrisqueen/tech-interview-copilot",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitchrisqueen/tech-interview-copilot.git"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "for f in app/*.js; do node --check \"$f\" || exit 1; done"
+  },
+  "dependencies": {
+    "@gitchrisqueen/copilot-core": "github:gitchrisqueen/copilot-core#v0.1.0"
+  }
+}

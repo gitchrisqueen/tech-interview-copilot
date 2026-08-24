@@ -1,0 +1,49 @@
+name: Bug report
+description: Something in Tech Interview Copilot is broken
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: checkboxes
+    id: services
+    attributes:
+      label: Which services were up when it happened? (check launch.command's output / logs/*.log)
+      options:
+        - label: web (8877)
+        - label: log/settings (8890)
+        - label: ollama bridge (11501)
+        - label: rag-server (8892)
+        - label: speaker-server / voice profiles (8891)
+        - label: whisper.cpp (8189)
+  - type: input
+    id: os
+    attributes:
+      label: macOS version
+    validations:
+      required: true
+  - type: input
+    id: node-python
+    attributes:
+      label: Node / Python versions
+      placeholder: "node -v / python3 --version"
+  - type: input
+    id: app-version
+    attributes:
+      label: App version / commit
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant console/server logs (redact your API keys and any interview content)

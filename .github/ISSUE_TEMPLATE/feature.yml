@@ -1,0 +1,23 @@
+name: Feature request
+description: Propose a change to Tech Interview Copilot
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's the problem this solves?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Does this belong here, or in copilot-core?
+      options:
+        - label: App-specific (interview prompts, RAG, cheat sheets, profile schema)
+        - label: Shared machinery that hearing-copilot could also use (file an issue on copilot-core instead)

@@ -1,0 +1,40 @@
+# Tech Interview Copilot — runtime + generated files, never committed
+logs/
+app/__pycache__/
+kb/__pycache__/
+__pycache__/
+*.pyc
+
+# Secrets — real API keys live here, injected into config.js at serve time. NEVER commit.
+.env
+
+# Per-machine settings written by the app's Config tab (via log-server /settings).
+app/settings.json
+
+# Real interview profiles. profiles/example/ (the fictional demo) is the only committed profile.
+# See profiles/README.md.
+profiles/local/
+
+# Knowledge-base build products: shallow clones of the source repos and the built
+# embedding index. Rebuild locally with kb/ingest.py (see README). Kept out of git
+# for size and because the source repos carry their own licenses.
+kb/clones/
+kb/index/
+kb/venv/
+
+# Uploaded candidate documents (resume, job description) and their extracted text.
+docs/uploads/
+
+# Voice fingerprints of real people (interviewers). Biometric-adjacent, local-only by design.
+voice-profiles/
+
+# Auto-downloaded speaker embedding model (~28 MB), fetched by launch.command.
+models/
+
+# npm
+node_modules/
+
+# test/CI artifacts
+.nyc_output/
+coverage/
+.DS_Store

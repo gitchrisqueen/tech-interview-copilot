@@ -1,0 +1,37 @@
+{
+  "embedding": {
+    "model": "nomic-embed-text",
+    "ollama_url": "http://localhost:11501",
+    "batch": 64
+  },
+  "chunk": { "max_chars": 1800, "overlap": 200 },
+  "repos": [
+    {
+      "name": "FAANG-Coding-Interview-Questions",
+      "url": "https://github.com/ombharatiya/FAANG-Coding-Interview-Questions",
+      "include": ["**/*.md"]
+    },
+    {
+      "name": "tech-interview-handbook",
+      "url": "https://github.com/yangshun/tech-interview-handbook",
+      "include": ["contents/**/*.md", "contents/**/*.mdx", "README.md"]
+    },
+    {
+      "name": "ai-engineering-field-guide",
+      "url": "https://github.com/alexeygrigorev/ai-engineering-field-guide",
+      "include": ["**/*.md"]
+    },
+    {
+      "name": "ai-interview-codex",
+      "url": "https://github.com/girijesh-ai/ai-interview-codex",
+      "include": ["**/*.md", "**/*.py", "**/*.ipynb"]
+    },
+    {
+      "name": "LeetCode-Solutions",
+      "url": "https://github.com/kamyu104/LeetCode-Solutions",
+      "include": ["README.md", "Python/*.py"],
+      "max_files": 1800,
+      "note": "Python solutions + the README complexity/tag tables only; the full repo is ~3.5k problems x several languages"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+  workflow_call: {}
+
+jobs:
+  js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run check
+      - run: npm install
+      - run: npx c8 -r lcov -r text --all --include='app/**/*.js' node --test test/*.test.js
+      - uses: codecov/codecov-action@v5
+        with:
+          flags: js
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install ruff
+      - run: ruff check --select=E,F,W app/*.py kb/*.py
+      - name: syntax-check every .py file
+        run: |
+          for f in app/*.py kb/*.py; do python3 -m py_compile "$f" || exit 1; done
+
+  shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - run: bash -n launch.command stop.command && shellcheck -S warning launch.command stop.command
+
+  scrub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: no private/case terms committed
+        run: |
+          if git grep -qriE 'duvo|defrag|richard|meet\.google|chris_queen' -- . ':!.github/workflows/ci.yml'; then
+            echo "Found a private-term match -- see PRIVACY.md."
+            git grep -riE 'duvo|defrag|richard|meet\.google|chris_queen' -- . ':!.github/workflows/ci.yml'
+            exit 1
+          fi
+          echo "clean"

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tech Interview Copilot</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="node_modules/@gitchrisqueen/copilot-core/css/base.css">
+  <link rel="stylesheet" href="app/domain.css">
+</head>
+<body>
+  <header class="appbar">
+    <h1>Tech Interview Copilot</h1>
+    <span class="disclaimer">Demo tool for personal interview practice. Using it covertly in a real interview may violate the interviewer's policies.</span>
+    <span class="spacer"></span>
+    <button id="startStop" class="live-toggle">Start</button>
+  </header>
+
+  <div class="grid">
+    <!-- LEFT: answers / code / cheat sheets / prep -->
+    <div class="col left">
+      <div class="panel" style="flex:1;">
+        <div class="tabbar" id="left-tabs">
+          <button data-view="answers" class="active">Answers</button>
+          <button data-view="code">Code</button>
+          <button data-view="brief">Brief</button>
+          <button data-view="cheats">Cheat sheets</button>
+          <button data-view="prep">Prep</button>
+        </div>
+        <div class="body" id="left-body"></div>
+      </div>
+    </div>
+
+    <!-- Vertical divider between left and right columns -->
+    <div class="col-divider" id="col-divider" role="separator" aria-orientation="vertical" title="Drag to resize columns"></div>
+
+    <!-- RIGHT: transcript (top) + live copilot / config (bottom) -->
+    <div class="col right">
+      <div class="panel" id="transcript-panel">
+        <div class="tabbar" id="transcript-tabs">
+          <button data-side="live" class="active">Transcript</button>
+        </div>
+        <div class="body" id="transcript-body"></div>
+      </div>
+
+      <!-- Horizontal divider between transcript and copilot panels -->
+      <div class="row-divider" id="row-divider" role="separator" aria-orientation="horizontal" title="Drag to resize"></div>
+
+      <div class="panel" id="copilot-panel">
+        <div class="tabbar" id="copilot-tabbar">
+          <button data-cop="live" class="active">Live</button>
+          <button data-cop="config">Config</button>
+          <span class="tab-spacer"></span>
+          <button id="copilot-collapse" class="collapse-btn" title="Collapse or expand this panel">&#9662;</button>
+        </div>
+        <div class="body copilot" id="copilot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- config.js first (served with .env secrets injected): sets window.CopilotCore + window.CONFIG
+       before any shared or app module reads them. -->
+  <script src="app/config.js"></script>
+  <script src="node_modules/@gitchrisqueen/copilot-core/js/md.js"></script>
+  <script src="node_modules/@gitchrisqueen/copilot-core/js/shell.js"></script>
+  <script src="node_modules/@gitchrisqueen/copilot-core/js/settings.js"></script>
+  <script src="app/hl.js"></script>
+  <!-- profile.js after settings.js (its per-machine overrides ride in the merged settings) and
+       before llm.js, which reads PROFILE when building every prompt. -->
+  <script src="app/profile.js"></script>
+  <script src="node_modules/@gitchrisqueen/copilot-core/js/transcript.js"></script>
+  <script src="node_modules/@gitchrisqueen/copilot-core/js/asr.js"></script>
+  <!-- llm-transport.js (core) sets window.LLM with the provider-failover transport; llm.js (app)
+       adds this app's domain prompts onto that same object. -->
+  <script src="node_modules/@gitchrisqueen/copilot-core/js/llm-transport.js"></script>
+  <script src="app/llm.js"></script>
+  <script src="app/rag.js"></script>
+  <script src="app/summary.js"></script>
+  <script src="app/qa.js"></script>
+  <script src="app/codepanel.js"></script>
+  <script src="app/app.js"></script>
+  <script src="node_modules/@gitchrisqueen/copilot-core/js/layout.js"></script>
+</body>
+</html>

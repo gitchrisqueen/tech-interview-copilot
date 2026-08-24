@@ -1,0 +1,56 @@
+name: claude-review
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+
+# Solo-maintainer note: GitHub will not let a PR author approve their own PR, so a literal
+# "1 human approval required" rule deadlocks every merge. This job is the substitute: it is a
+# REQUIRED status check (see branch protection), and its own exit code -- not GitHub's native
+# review-approval state -- is what blocks the merge. See README.md's "Branch protection" section.
+jobs:
+  review:
+    if: github.actor != 'claude[bot]'   # a claude[bot] follow-up commit must not re-trigger and self-block
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: anthropics/claude-code-action@v1
+        id: review
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Review this PR as a blocking code reviewer for a PUBLIC open-source repo. Check:
+            correctness, secret leakage (no .env values, no real company/person/interview content --
+            this repo is public and must only ever contain the fictional "example" profile;
+            anything real belongs in git-ignored profiles/local/), test coverage of changed lines,
+            the zero-build constraint (no new runtime npm/pip dependencies without clear
+            justification), and load-order safety of window-global modules (app/*.js files are
+            loaded via plain <script> tags in a fixed order -- see index.html).
+
+            Post your review as a PR comment. End it with a single line, exactly one of:
+            VERDICT: APPROVE
+            VERDICT: REQUEST_CHANGES
+      # The action posts its review as a regular PR comment rather than exposing a structured
+      # pass/fail output, so the gate reads that comment back rather than guessing at internal
+      # action outputs (which have changed across action versions before). If this ever finds no
+      # comment at all, that's a signal the action itself failed upstream -- check the job log.
+      - name: enforce the verdict
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          comment=$(gh api "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" \
+            --jq '[.[] | select(.body | contains("VERDICT:"))] | last | .body // ""')
+          echo "$comment"
+          if [ -z "$comment" ]; then
+            echo "No VERDICT comment found from the review action -- treating as a failure to be safe."
+            exit 1
+          fi
+          if echo "$comment" | grep -q "VERDICT: REQUEST_CHANGES"; then
+            echo "Claude review requested changes -- see the PR comment above."
+            exit 1
+          fi

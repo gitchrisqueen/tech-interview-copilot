@@ -1,0 +1,16 @@
+coverage:
+  status:
+    project:
+      default:
+        # Honest measured baseline, not the 80% goal -- see README.md's "Test coverage" section.
+        # threshold: 0 means this can only ratchet UP over time as tests are added; it must never
+        # be lowered to make a PR pass.
+        target: 15%
+        threshold: 0
+    patch:
+      default:
+        # New code is held to the real bar from day one, even while the overall project ratchets
+        # up toward it.
+        target: 80%
+comment:
+  layout: "condensed_header, diff, flags"

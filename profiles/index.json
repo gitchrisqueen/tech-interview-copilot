@@ -1,0 +1,9 @@
+{
+  "profiles": [
+    {
+      "id": "example",
+      "file": "profiles/example/profile.json",
+      "label": "Acme Robotics — Forward Deployed Engineer (demo)"
+    }
+  ]
+}
