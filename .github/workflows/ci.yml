@@ -16,7 +16,7 @@ jobs:
       - run: npm run check
       - run: npm install
       - run: npx c8 -r lcov -r text --all --include='app/**/*.js' node --test test/*.test.js
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v7
         with:
           flags: js
           token: ${{ secrets.CODECOV_TOKEN }}
