@@ -2,7 +2,7 @@
 # (voice profiles). kb/ingest.py itself is stdlib-only; it just needs git and a running Ollama
 # server with the embedding model pulled.
 numpy>=1.26
-pypdf>=4.0
+pypdf>=6.16.1
 # Voice profiles: CAM++ speaker embeddings. Optional - without it the speaker sidecar is skipped
 # and transcript lines stay labeled "Interviewer".
 sherpa-onnx>=1.10
