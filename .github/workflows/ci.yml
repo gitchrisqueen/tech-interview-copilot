@@ -29,7 +29,7 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install ruff
-      - run: ruff check --select=E,F,W app/*.py kb/*.py
+      - run: ruff check app/*.py kb/*.py   # rule selection/ignores come from pyproject.toml; a CLI --select overrides the config's ignore list too
       - name: syntax-check every .py file
         run: |
           for f in app/*.py kb/*.py; do python3 -m py_compile "$f" || exit 1; done
