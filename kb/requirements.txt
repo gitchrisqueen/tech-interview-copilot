@@ -5,7 +5,7 @@ numpy>=1.26
 pypdf>=6.16.1
 # Voice profiles: CAM++ speaker embeddings. Optional - without it the speaker sidecar is skipped
 # and transcript lines stay labeled "Interviewer".
-sherpa-onnx>=1.10
+sherpa-onnx>=1.13.6
 # Shared web/log server + speaker-engine math. Pinned to a tag until the package is published to
 # PyPI (see copilot-core's release.yml / CONTRIBUTING.md); switch to `copilot-core==X.Y.Z` once it is.
 copilot-core @ git+https://github.com/gitchrisqueen/copilot-core@v0.1.0
