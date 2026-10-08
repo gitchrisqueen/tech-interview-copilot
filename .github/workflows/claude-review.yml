@@ -9,7 +9,12 @@ on:
 # review-approval state -- is what blocks the merge. See README.md's "Branch protection" section.
 jobs:
   review:
-    if: github.actor != 'claude[bot]'   # a claude[bot] follow-up commit must not re-trigger and self-block
+    # claude[bot]: a follow-up commit must not re-trigger and self-block.
+    # dependabot[bot]: Dependabot-triggered runs only receive Dependabot secrets, so
+    # ANTHROPIC_API_KEY is empty and the review step fails on every dependency PR. A job
+    # skipped via `if:` reports as successful, so it does not block merges even when this
+    # check is required in branch protection.
+    if: github.actor != 'claude[bot]' && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -30,6 +35,8 @@ jobs:
           # this list, but does NOT strip it from the configured value itself -- "dependabot[bot]"
           # here never matches the normalized "dependabot" it computes, so every Dependabot PR
           # failed this check. Use the bare, un-suffixed name.
+          # Currently unreachable for Dependabot: the job-level `if:` skips its runs. To gate
+          # Dependabot PRs again, add ANTHROPIC_API_KEY as a Dependabot secret and drop that clause.
           allowed_bots: "dependabot"
           prompt: |
             Review this PR as a blocking code reviewer for a PUBLIC open-source repo. Check:
