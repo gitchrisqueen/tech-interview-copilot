@@ -13,10 +13,8 @@ every `.py` file here.
 ## Branch protection (repo owner setup, one time)
 
 This repo is maintained solo, and GitHub does not allow a PR author to approve their own PR -- a
-literal "1 human approval required" rule would deadlock every merge. The review requirement is
-instead satisfied by the `claude-review` workflow: it posts a review comment on every PR and its
-own job exit code is a **required status check**, so it genuinely blocks a bad merge even with
-zero required human approvals.
+literal "1 human approval required" rule would deadlock every merge. Required approvals stay at
+zero; the required status checks below are what block a bad merge.
 
 **Settings -> Rules -> Rulesets -> New branch ruleset**, name `main-protection`, target the
 default branch, Enforcement: Active.
@@ -31,7 +29,7 @@ default branch, Enforcement: Active.
   - Require review from Code Owners: **off** (would deadlock a solo maintainer)
   - Require conversation resolution before merging: on
 - Require status checks to pass: on, require branches to be up to date, required checks:
-  `js`, `python`, `shell`, `scrub`, `review` (the claude-review job), `codecov/project`,
+  `js`, `python`, `shell`, `scrub`, `codecov/project`,
   `codecov/patch` (the codecov pair only becomes selectable after the first coverage upload).
 
 **Settings -> General**: allow squash merge only; auto-delete head branches; Issues enabled.
@@ -41,7 +39,6 @@ on; secret scanning + push protection on.
 
 ## Required repo secrets
 
-- `ANTHROPIC_API_KEY` -- for the claude-review workflow
 - `CODECOV_TOKEN` -- from the CodeCov GitHub App install
 
 ## Coverage policy

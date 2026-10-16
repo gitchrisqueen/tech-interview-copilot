@@ -302,7 +302,7 @@ Test coverage is intentionally honest, not padded: `profile.js`/`rag.js` are wel
 `app.js`/`qa.js`/`summary.js`/`codepanel.js`/`hl.js`/`llm.js` are large DOM-driven or prompt-heavy
 modules with little coverage yet. `codecov.yml`'s project target tracks the real measured baseline
 and only ratchets up as tests are added -- see [CONTRIBUTING.md](CONTRIBUTING.md) for the branch
-protection and CI setup, including how a solo maintainer satisfies a required-review gate.
+protection and CI setup for a solo maintainer.
 
 ## License
 
